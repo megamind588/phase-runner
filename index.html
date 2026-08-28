@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#050510">
+  <title>Phase Runner</title>
+
+  <!-- CrazyGames HTML5 SDK v3. It must load before game.js. -->
+  <script src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top, #0a0f2c 0%, #03040d 55%, #000 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      touch-action: none;
+      overscroll-behavior: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    /*
+      Phase Runner intentionally stays PORTRAIT.
+      The internal game remains 360x640, while this container scales it
+      smoothly to fit phones, tablets and desktop/laptop iframe sizes.
+      Desktop gets natural side padding instead of rotating the game.
+    */
+    #game-container {
+      /* Always preserve the game's original 9:16 portrait shape.
+         The width is constrained by both the viewport width and height,
+         so desktop and mobile can never squeeze or stretch the canvas. */
+      width: min(92vw, 450px, calc(96vh * 9 / 16));
+      height: auto;
+      aspect-ratio: 9 / 16;
+      background: linear-gradient(180deg, #050a1a, #02040d);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 246, 255, 0.08);
+      border: 2px solid rgba(0, 246, 255, 0.8);
+      position: relative;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at center, rgba(0, 246, 255, 0.05), transparent 70%),
+        #050510;
+      touch-action: none;
+    }
+
+    /* On short desktop screens, use the available height while keeping 9:16. */
+    @media (max-height: 600px) {
+      #game-container {
+        width: min(92vw, calc(94vh * 9 / 16));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="gameCanvas" width="360" height="640"></canvas>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
